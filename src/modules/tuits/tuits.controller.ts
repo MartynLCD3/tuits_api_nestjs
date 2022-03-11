@@ -1,5 +1,5 @@
 import {
-	Controller, 
+	Controller,
 	Get,
 	Patch,
 	Delete,
@@ -15,17 +15,16 @@ import { TuitsService } from './tuits.service';
 
 @Controller('tuits')
 export class TuitsController {
-
 	constructor(private readonly tuitService: TuitsService) {}
-	
-	@Get() 
+
+	@Get()
 	getTuits(@Query() filterQuery): Tuit[] {
-		const { searchTerm, orderBy } = filterQuery; 
-		return this.tuitService.getTuits();
+		const { searchTerm, orderBy } = filterQuery;
+		return this.tuitService.getTuits(searchTerm, orderBy);
 	}
 
 	@Get(':id')
-	getTuit(@Param('id') id: string ): Tuit {
+	getTuit(@Param('id') id: string): Tuit {
 		return this.tuitService.getTuit(id);
 	}
 
@@ -33,7 +32,7 @@ export class TuitsController {
 	createTuit(@Body() message: CreateTuitDto): void {
 		return this.tuitService.createTuit(message);
 	}
-	
+
 	@Patch(':id')
 	updateTuit(@Param('id') id: string, @Body() tuit: UpdateTuitDto): Tuit {
 		return this.tuitService.updateTuit(id, tuit);

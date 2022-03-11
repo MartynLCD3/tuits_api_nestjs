@@ -5,8 +5,8 @@ import { TuitsController } from './modules/tuits/tuits.controller';
 import { TuitsService } from './modules/tuits/tuits.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController, TuitsController],
-  providers: [AppService, TuitsService],
+	imports: [],
+	controllers: [AppController, TuitsController],
+	providers: [AppService, TuitsService]
 })
 export class AppModule {}
