@@ -5,8 +5,7 @@ import {
 	Delete,
 	Post,
 	Param,
-	Body,
-	Query
+	Body
 } from '@nestjs/common';
 
 import { CreateTuitDto, UpdateTuitDto } from './dto';
@@ -18,9 +17,8 @@ export class TuitsController {
 	constructor(private readonly tuitService: TuitsService) {}
 
 	@Get()
-	getTuits(@Query() filterQuery): Tuit[] {
-		const { searchTerm, orderBy } = filterQuery;
-		return this.tuitService.getTuits(searchTerm, orderBy);
+	getTuits(): Tuit[] {
+		return this.tuitService.getTuits();
 	}
 
 	@Get(':id')
@@ -30,6 +28,7 @@ export class TuitsController {
 
 	@Post()
 	createTuit(@Body() message: CreateTuitDto): void {
+		console.log(message);
 		return this.tuitService.createTuit(message);
 	}
 
