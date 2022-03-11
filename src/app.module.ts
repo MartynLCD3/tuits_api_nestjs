@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TuitsController } from './tuits/tuits.controller';
-import { TuitsService } from './tuits/tuits.service';
+import { TuitsController } from './modules/tuits/tuits.controller';
+import { TuitsService } from './modules/tuits/tuits.service';
 
 @Module({
   imports: [],

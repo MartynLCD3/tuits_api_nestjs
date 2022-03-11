@@ -6,10 +6,10 @@ import {
 	Post,
 	Param,
 	Body,
-	HttpCode,
 	Query
 } from '@nestjs/common';
 
+import { CreateTuitDto, UpdateTuitDto } from './dto';
 import { Tuit } from './tuit.entity';
 import { TuitsService } from './tuits.service';
 
@@ -30,12 +30,12 @@ export class TuitsController {
 	}
 
 	@Post()
-	createTuit(@Body('message') message: string): void {
+	createTuit(@Body() message: CreateTuitDto): void {
 		return this.tuitService.createTuit(message);
 	}
 	
 	@Patch(':id')
-	updateTuit(@Param('id') id: string, @Body('message') tuit): Tuit {
+	updateTuit(@Param('id') id: string, @Body() tuit: UpdateTuitDto): Tuit {
 		return this.tuitService.updateTuit(id, tuit);
 	}
 
