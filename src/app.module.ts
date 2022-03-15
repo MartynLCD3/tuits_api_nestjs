@@ -1,12 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TuitsController } from './modules/tuits/tuits.controller';
-import { TuitsService } from './modules/tuits/tuits.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TuitsModule } from './modules/tuits/tuits.module';
 
 @Module({
-	imports: [],
-	controllers: [AppController, TuitsController],
-	providers: [AppService, TuitsService]
+	imports: [TuitsModule, TypeOrmModule.forRoot({
+		type: 'postgres',
+		host: 'localhost',
+		port: 5432,
+		username: 'admin',
+		password: 'my-weak-password',
+		database: 'postgres',
+		autoLoadEntities: true,
+		synchronize: true
+	})],
 })
+
 export class AppModule {}
