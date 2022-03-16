@@ -4,13 +4,13 @@ import { Tuit } from './tuit.entity';
 
 @Injectable()
 export class TuitsService {
-	private tuits: Tuit[] = [{ id: '1', message: 'Hello World amiguis' }];
+	private tuits: Tuit[] = [{ id: 2, message: 'Hello World amiguis' }];
 
 	getTuits(): Tuit[] {
 		return this.tuits;
 	}
 
-	getTuit(id: string): Tuit {
+	getTuit(id: number): Tuit {
 		const tuit = this.tuits.find((item) => item.id === id);
 		if (!tuit) {
 			throw new NotFoundException('Tuit not found');
@@ -20,18 +20,18 @@ export class TuitsService {
 
 	createTuit({ message }: CreateTuitDto) {
 		this.tuits.push({
-			id: (Math.floor(Math.random() * 2000) + 1).toString(),
+			id: (Math.floor(Math.random() * 2000) + 1),
 			message
 		});
 	}
 
-	updateTuit(id: string, { message }: UpdateTuitDto) {
+	updateTuit(id: number, { message }: UpdateTuitDto) {
 		const tuit: Tuit = this.getTuit(id);
 		tuit.message = message;
 		return tuit;
 	}
 
-	removeTuit(id: string) {
+	removeTuit(id: number) {
 		const index = this.tuits.findIndex((tuit) => tuit.id === id);
 		if (index >= 0) {
 			this.tuits.splice(index, 1);
