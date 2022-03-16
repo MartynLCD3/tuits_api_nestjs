@@ -13,11 +13,11 @@ export class TuitsService {
 	) {}
 
 	async getTuits({ limit, offset }: PaginationQueryDto): Promise<Tuit[]> {
-		return await this.tuitRepository.find({ 
-			relations: ['user'], 
+		return await this.tuitRepository.find({
+			relations: ['user'],
 			skip: offset,
 			take: limit
-	 	});
+		});
 	}
 
 	async getTuit(id: number): Promise<Tuit> {
