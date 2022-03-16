@@ -17,28 +17,28 @@ export class TuitsController {
 	constructor(private readonly tuitService: TuitsService) {}
 
 	@Get()
-	getTuits(): Tuit[] {
+	getTuits(): Promise<Tuit[]> {
 		return this.tuitService.getTuits();
 	}
 
 	@Get(':id')
-	getTuit(@Param('id') id: number): Tuit {
+	getTuit(@Param('id') id: number): Promise<Tuit> {
 		return this.tuitService.getTuit(id);
 	}
 
 	@Post()
-	createTuit(@Body() message: CreateTuitDto): void {
+	createTuit(@Body() message: CreateTuitDto): Promise<Tuit> {
 		console.log(message);
 		return this.tuitService.createTuit(message);
 	}
 
 	@Patch(':id')
-	updateTuit(@Param('id') id: number, @Body() tuit: UpdateTuitDto): Tuit {
+	updateTuit(@Param('id') id: number, @Body() tuit: UpdateTuitDto): Promise<Tuit> {
 		return this.tuitService.updateTuit(id, tuit);
 	}
 
 	@Delete(':id')
-	deleteTuit(@Param('id') id: number): void {
+	deleteTuit(@Param('id') id: number): Promise<void> {
 		return this.tuitService.removeTuit(id);
 	}
 }
