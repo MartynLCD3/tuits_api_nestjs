@@ -9,5 +9,4 @@ import { Tuit } from './tuit.entity';
 	controllers: [TuitsController],
 	providers: [TuitsService]
 })
-
 export class TuitsModule {}

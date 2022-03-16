@@ -33,7 +33,10 @@ export class TuitsController {
 	}
 
 	@Patch(':id')
-	updateTuit(@Param('id') id: number, @Body() tuit: UpdateTuitDto): Promise<Tuit> {
+	updateTuit(
+		@Param('id') id: number,
+		@Body() tuit: UpdateTuitDto
+	): Promise<Tuit> {
 		return this.tuitService.updateTuit(id, tuit);
 	}
 
