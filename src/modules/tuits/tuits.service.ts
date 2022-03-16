@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateTuitDto, UpdateTuitDto } from './dto';
+import { CreateTuitDto, PaginationQueryDto, UpdateTuitDto } from './dto';
 import { Tuit } from './tuit.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,8 +10,12 @@ export class TuitsService {
 		@InjectRepository(Tuit) private readonly tuitRepository: Repository<Tuit>
 	) {}
 
-	async getTuits(): Promise<Tuit[]> {
-		return await this.tuitRepository.find({ relations: ['user'] });
+	async getTuits({ limit, offset }: PaginationQueryDto): Promise<Tuit[]> {
+		return await this.tuitRepository.find({ 
+			relations: ['user'], 
+			skip: offset,
+			take: limit
+	 	});
 	}
 
 	async getTuit(id: number): Promise<Tuit> {
@@ -32,16 +36,12 @@ export class TuitsService {
 			id,
 			message
 		});
-		await this.tuitRepository.save(tuit)
 
 		if (!tuit) {
 			throw new NotFoundException('Resource not found');
 		}
 
-		return this.tuitRepository.findOne({
-			where: { id: user.id },
-			relations: ['user']
-		});
+		return tuit;
 	}
 
 	async removeTuit(id: number): Promise<void> {
